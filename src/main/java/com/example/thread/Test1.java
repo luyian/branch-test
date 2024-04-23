@@ -38,4 +38,11 @@ public class Test1 {
         product.start();
 
     }
+
+    @Test
+    public void test01() {
+
+    }
+
+
 }
