@@ -44,5 +44,8 @@ public class Test1 {
 
     }
 
-
+    @Test
+    public void test03() {
+        System.out.println("test branch 3-1");
+    }
 }
