@@ -48,5 +48,9 @@ public class Test1 {
         System.out.println("hello git1-3");
     }
 
+    @Test
+    public void test02() {
+        System.out.println("test branch2");
+    }
 
 }
