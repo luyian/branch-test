@@ -2,19 +2,16 @@ package com.example.thread;
 
 import com.example.demo.BaseUser;
 import com.example.demo.User;
+import com.example.enmu.AccountState;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.Callable;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class Test1 {
 
     public static int duckNum = 100;
@@ -116,13 +113,17 @@ public class Test1 {
         String s = list.stream().filter(x -> x.equals("zhangsan19")).distinct().findFirst().orElse("xxxx");
         System.out.println(s);
 
+        list.removeIf(x->x.equals("zhangsan1"));
+        list.forEach(System.out::println);
+        System.out.println(Boolean.TRUE.equals(null));
+        Boolean.TRUE.equals(null);
     }
 
     @Test
     public void test08() {
-        long a = 0L;
-        Integer b = 0;
-        System.out.println(b.equals(a));
+        List<String> list = new ArrayList<>();
+        Map<String, String> collect = list.stream().collect(Collectors.toMap(item -> item, Function.identity(), (v1, v2) -> v1));
+        System.out.println(collect.get(""));
     }
 
 
@@ -154,5 +155,176 @@ public class Test1 {
 
 
     }
+
+    @Test
+    public void test10() {
+        List<String> list = new ArrayList<>();
+        list.add(null);
+        list.add("账单");
+        String collect = list.stream().filter(Objects::nonNull).collect(Collectors.joining(","));
+        System.out.println(collect);
+
+    }
+
+    @Test
+    public void test11() {
+        Integer i = null;
+        System.out.println(Boolean.TRUE.equals(null));
+    }
+
+
+
+    @Test
+    public void test12() {
+        // 创建单据列表
+        List<String> documents = new ArrayList<>();
+        for (int i = 1; i <= 200; i++) {
+            documents.add("Alice " + i);
+        }
+        for (int i = 1; i <= 600; i++) {
+            documents.add("Bob " + i);
+        }
+        for (int i = 1; i <= 400; i++) {
+            documents.add("Charlie " + i);
+        }
+
+        // 创建审核人员列表
+        List<String> reviewers = new ArrayList<>();
+        reviewers.add("Alice");
+        reviewers.add("Bob");
+        reviewers.add("Charlie");
+        reviewers.add("David");
+        reviewers.add("Eve");
+
+
+        Map<String, List<String>> assignedDocuments = new HashMap<>();
+        // 初始化每个审核人员的单据列表
+        for (String reviewer : reviewers) {
+            assignedDocuments.put(reviewer, new ArrayList<>());
+        }
+
+        // 打乱单据列表
+        Collections.shuffle(documents);
+
+        // 最大值数量
+        int maxCount = documents.size() / reviewers.size() + 1;
+
+        // 分配单据
+        int reviewerIndex = 0;
+        for (String document : documents) {
+            List<String> precedenceReviewers = getPrecedenceReviewers(assignedDocuments);
+            String currentReviewer = precedenceReviewers.get(0);
+            String nextReviewer = precedenceReviewers.get(1);
+
+            String addReviewer = currentReviewer;
+            // 确保当前单据不分配给当前审核人员
+            if (document.startsWith(currentReviewer)) {
+                addReviewer = nextReviewer;
+            }
+            assignedDocuments.get(addReviewer).add(document);
+            reviewerIndex++;
+        }
+
+        // 打印结果
+        for (Map.Entry<String, List<String>> entry : assignedDocuments.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue().size());
+        }
+
+        System.out.println(getPrecedenceReviewers(assignedDocuments));
+    }
+
+    /**
+     * 按已分配数量确定优先级
+     * @param assignedDocuments
+     * @return
+     */
+    public List<String> getPrecedenceReviewers(Map<String, List<String>> assignedDocuments) {
+        Map<String, Integer> reviewerCounts = new HashMap<>();
+        List<SortHelper> list = new ArrayList<>();
+        assignedDocuments.forEach((reviewer, documents) -> {
+            list.add(new SortHelper(reviewer, documents));
+        });
+        Collections.sort(list);
+        return list.stream().limit(2).map(SortHelper::getName).collect(Collectors.toList());
+    }
+
+    class SortHelper implements Comparable<SortHelper>{
+        private String name;
+        private List<String> assignedDocuments;
+
+        public SortHelper(String name, List<String> assignedDocuments) {
+            this.name = name;
+            this.assignedDocuments = assignedDocuments;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public List<String> getAssignedDocuments() {
+            return assignedDocuments;
+        }
+
+        public void setAssignedDocuments(List<String> assignedDocuments) {
+            this.assignedDocuments = assignedDocuments;
+        }
+
+        public int getSize() {
+            if (assignedDocuments != null) {
+                return assignedDocuments.size();
+            }
+            return 0;
+        }
+
+        @Override
+        public int compareTo(SortHelper o) {
+            return this.getSize() - o.getSize();
+        }
+    }
+
+    @Test
+    public void test13() {
+        List<String> strings = new ArrayList<>();
+        Map<String, String> collect = strings.stream().collect(Collectors.toMap(item -> item, item -> item));
+        System.out.println(collect.get("1"));
+    }
+
+    /**
+     * 测试流去重
+     */
+    @Test
+    public void test14() {
+        List<User> list = new ArrayList<>();
+        list.add(new User("张三", 10));
+        list.add(new User("李四", 10));
+        list.add(new User("张三", 11));
+        list.add(new User("张三1", 11));
+
+        list = list.stream()
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toMap(p -> p.getName(), p -> p, (p1, p2) -> p1),
+                        map -> new ArrayList<>(map.values())
+                ));
+        list.forEach(item -> System.out.println(item.getName() + "---" + item.getAge()));
+    }
+
+    @Test
+    public void test15() {
+        AccountState[] values = AccountState.values();
+        System.out.println(Arrays.toString(values));
+
+        List<HashMap<String, Object>> list = Arrays.asList(values).stream().map(item -> {
+            HashMap<String, Object> objectObjectHashMap = new HashMap<>();
+            objectObjectHashMap.put("value", item.getValue());
+            objectObjectHashMap.put("desc", item.getDesc());
+            return objectObjectHashMap;
+        }).collect(Collectors.toList());
+        list.forEach(System.out::println);
+    }
+
 
 }

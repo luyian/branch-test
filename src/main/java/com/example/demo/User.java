@@ -1,14 +1,13 @@
 package com.example.demo;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Objects;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 //@EqualsAndHashCode
 public class User {
     private Integer id;
@@ -16,6 +15,11 @@ public class User {
     private String code;
     private Integer age;
     private String type;
+
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
 
     @Override
     public boolean equals(Object o) {
