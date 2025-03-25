@@ -1,5 +1,6 @@
 package com.example.thread;
 
+import cn.hutool.core.date.DateUtil;
 import com.example.demo.BaseUser;
 import com.example.demo.User;
 import com.example.enmu.AccountState;
@@ -7,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -291,6 +293,9 @@ public class Test1 {
         List<String> strings = new ArrayList<>();
         Map<String, String> collect = strings.stream().collect(Collectors.toMap(item -> item, item -> item));
         System.out.println(collect.get("1"));
+        Map<String, Long> collect1 = strings.stream().collect(Collectors.groupingBy(item -> item, Collectors.counting()));
+        System.out.println(collect1);
+
     }
 
     /**
@@ -326,5 +331,56 @@ public class Test1 {
         list.forEach(System.out::println);
     }
 
+
+    @Test
+    public void test16() throws Exception {
+        int compare = DateUtil.compare(DateUtil.parse("2024-11-29", "yyyy-MM-dd"), new Date(), "yyyy-MM-dd");
+        System.out.println(compare);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = new Date();
+        Date date2 = simpleDateFormat.parse("2023-12-24");
+        Date date3 = simpleDateFormat.parse("2024-12-24");
+
+        System.out.println(date1.compareTo(date2));
+        System.out.println(date1.compareTo(date3));
+
+    }
+
+
+    @Test
+    public void test17() {
+        List<Integer> list = Arrays.asList(11, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        list = list.stream().sorted(Comparator.comparingInt(Integer::intValue).reversed()).collect(Collectors.toList());
+        for (Integer integer : list) {
+            System.out.println(integer);
+            if (integer == 8) {
+                break;
+            }
+        }
+        System.out.println(list);
+
+        System.out.println(list.stream().filter(item -> item == 12).collect(Collectors.toList()));
+    }
+
+    @Test
+    public void test18() {
+        List<User> list = new ArrayList<>();
+//        list.add(new User("张三", 7));
+//        list.add(new User("李四", 10));
+//        list.add(new User("张三", 11));
+        list.add(new User("张三1", null));
+
+        int i = list.stream().map(User::getAge).filter(Objects::nonNull).reduce(0, Integer::sum).intValue();
+//        int i = list.stream().map(User::getAge).reduce(0, Integer::sum).intValue();
+
+        String collect = list.stream().filter(item -> Objects.nonNull(item.getAge())).map(x -> "" + x.getAge()).collect(Collectors.joining(","));
+        System.out.println(collect);
+    }
+
+    @Test
+    public void test19() {
+        System.out.println(Integer.parseInt("-1"));
+    }
 
 }

@@ -1,0 +1,27 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8082
+
+spring:
+  application:
+    name: test
+  http:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  # thymeleaf配置
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  web:
+    resources:
+      static-locations: classpath:/templates/
+  jackson:
+    time-zone: GMT+8
+# 全局配置
+my-global:
+  file-path: D:/upload
+
