@@ -18,7 +18,7 @@ spring:
     suffix: .html
   web:
     resources:
-      static-locations: classpath:/templates/
+      static-locations: classpath:/templates/, classpath:/static/
   jackson:
     time-zone: GMT+8
 # 全局配置

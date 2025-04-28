@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkuser_management_system"]=self["webpackChunkuser_management_system"]||[]).push([[807],{9807:function(e,n,u){u.r(n),u.d(n,{default:function(){return f}});var r=u(641);function t(e,n){return(0,r.uX)(),(0,r.CE)("h1",null,"角色管理")}var s=u(6262);const a={},c=(0,s.A)(a,[["render",t]]);var f=c}}]);
+//# sourceMappingURL=807.eece16ac.js.map
