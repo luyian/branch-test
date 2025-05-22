@@ -15,6 +15,16 @@ public class PDFMerger {
         String desktopPath = System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "tmp";
         // 输出PDF文件路径
         String outputFile = System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "merged_invoice.pdf";
+        // 检查输出文件是否存在，如果存在则删除
+        File outputPdfFile = new File(outputFile);
+        if (outputPdfFile.exists()) {
+            if (outputPdfFile.delete()) {
+                System.out.println("Existing output file deleted.");
+            } else {
+                System.out.println("Failed to delete existing output file.");
+                return;
+            }
+        }
 
         try {
             mergePDFs(desktopPath, outputFile);

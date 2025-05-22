@@ -137,8 +137,11 @@
             <version>4.4</version>
         </dependency>
 
-
-
+        <dependency>
+            <groupId>com.galliumdata.adumbra</groupId>
+            <artifactId>adumbra</artifactId>
+            <version>0.8</version>
+        </dependency>
     </dependencies>
 
     <build>

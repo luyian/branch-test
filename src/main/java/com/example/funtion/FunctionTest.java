@@ -5,6 +5,7 @@ public class FunctionTest {
     public static void main(String[] args) {
         String params = "asfg";
         String res = doRun(() -> queryPage(params));
+        System.out.println(res);
     }
 
     static String doRun(Demo demo) {
