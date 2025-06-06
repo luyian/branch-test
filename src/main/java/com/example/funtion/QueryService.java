@@ -1,6 +1,5 @@
 package com.example.funtion;
 
-import cn.hutool.json.JSONUtil;
 import org.apache.poi.util.StringUtil;
 
 import java.util.ArrayList;
@@ -42,12 +41,6 @@ public class QueryService {
         return list;
     }
 
-    public <T extends BaseSearch> void printPageData(QueryFactory<T> queryFactory, T search) {
-        List<? extends BaseSearch> baseSearches = queryFactory.queryPage(search);
-        String jsonStr = JSONUtil.toJsonStr(baseSearches);
-        System.out.println(jsonStr);
-    }
-
 
     public static void main(String[] args) {
         QueryService queryService = new QueryService();
@@ -55,13 +48,13 @@ public class QueryService {
         search.setPageNum(1);
         search.setPageSize(10);
         search.setCreateUser("张四");
-        queryService.printPageData(queryService::queryOrder, search);
+        PrintUtil.printPageData(queryService::queryOrder, search);
 
 
         BomInfo search2 = new BomInfo();
         search2.setPageNum(1);
         search2.setPageSize(10);
-        queryService.printPageData(queryService::queryBom, search2);
+        PrintUtil.printPageData(queryService::queryBom, search2);
     }
 
 }
