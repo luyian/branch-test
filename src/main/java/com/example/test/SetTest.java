@@ -1,5 +1,6 @@
 package com.example.test;
 
+import com.example.enmu.AccountState;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -12,5 +13,17 @@ public class SetTest {
         boolean bb = uniqueSet.add("aa");
         System.out.println(aa);
         System.out.println(bb);
+    }
+
+    @Test
+    public void test2() {
+        OrdOrder  sss = new OrdOrder();
+        sss.setDoaccount("123");
+        test3(sss);
+        System.out.println(sss.getDoaccount());
+    }
+
+    public void test3(OrdOrder  sss) {
+        sss.setDoaccount("1235");
     }
 }
