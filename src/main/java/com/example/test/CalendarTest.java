@@ -1,5 +1,6 @@
 package com.example.test;
 
+import cn.hutool.json.JSONUtil;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
@@ -74,5 +75,23 @@ public class CalendarTest {
 
         System.out.println(endTime + "---" + startTime);
     }
+
+    @Test
+    public void test05() {
+        Date date = new Date();
+        String string = "{\"createTime\":\"Fri Aug 29 15:49:57 CST 2025\", \"stationno\":\"124245\"}";
+//        String string = "{\"createTime\":\"2025-01-01 23:59:59\", \"stationno\":\"124245\"}";
+
+        OrdOrder ordOrder = JSONUtil.toBean(string, OrdOrder.class);
+        System.out.println(ordOrder.getCreateTime());
+        System.out.println(ordOrder.getStationno());
+    }
+
+    @Test
+    public void test06() {
+        int i = 0;
+        System.out.println("i=" + (++i));
+    }
+
 
 }
