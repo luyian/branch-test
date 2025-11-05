@@ -31,6 +31,13 @@ spring:
       static-locations: classpath:/templates/, classpath:/static/
   jackson:
     time-zone: GMT+8
+  clickhouse:
+    datasource:
+      url: jdbc:clickhouse://59.110.33.127:8123/solarmonitortest
+      username: solarmonitor
+      password: bzc@2022*qwe123
+      driver-class-name: ru.yandex.clickhouse.ClickHouseDriver
+
 # 全局配置
 my-global:
   file-path: D:/upload
