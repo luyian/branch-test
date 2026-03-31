@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class CalendarTest {
 
@@ -93,5 +94,36 @@ public class CalendarTest {
         System.out.println("i=" + (++i));
     }
 
+    @Test
+    public void test07() {
 
+        Date date = new Date(1763024376000L);
+        System.out.println(formatDateTime(1763026778000L));
+
+        System.out.println(Objects.equals(null, null));
+    }
+
+    /**
+     * 将时间戳格式化为：yyyy-MM-dd HH:mm:ss
+     */
+    public static String formatDateTime(Long time) {
+        if (time == null || time == 0) {
+            return "";
+        }
+        Date date = null;
+        if (time.toString().length() < 13) {
+            date = new Date(time * 1000);
+        } else {
+            date = new Date(time);
+        }
+        return format(date, "yyyy-MM-dd HH:mm:ss");
+    }
+
+    public static String format(Date date, String fmt) {
+        if (date == null)
+            return "";
+
+        SimpleDateFormat f = new SimpleDateFormat(fmt);
+        return f.format(date);
+    }
 }

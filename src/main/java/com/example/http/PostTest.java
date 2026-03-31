@@ -17,11 +17,11 @@ public class PostTest {
         headers.put("cookie", "PLAY_SESSION=\"6efcb3c99df41b9d04811020d7c2395c899947b8-___ID=1465cbb8-a177-49b4-8e92-f66efccb6938\"; manageutoken=7AB615619ED420D3DB32DCFA54FF1066-6E0A6C; unionsolar_selMenuGroup=4");
 
         // 设置起始日期和结束日期
-        String startDateStr = "2025-07-16";
-        String endDateStr = "2025-10-20";
+        String startDateStr = "2026-01-08";
+        String endDateStr = "2026-01-08";
 
         // sn码
-        String sns = "A2462608492,A2462715047,A2340309182,A2462608510";
+        String sns = "4015kDTG24AG1054";
         String[] snArr = Arrays.stream(sns.split(",")).distinct().toArray(String[]::new);
         for (int i = 0; i < snArr.length; i++) {
             doPostRequest(headers, url, snArr[i]);
