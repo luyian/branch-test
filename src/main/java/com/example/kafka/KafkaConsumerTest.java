@@ -15,7 +15,7 @@ public class KafkaConsumerTest {
     public static void main(String[] args) {
 
         Map<String, Object> consumerConfig = new HashMap<>();
-        consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "119.45.176.101:9092");
         consumerConfig.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
 
