@@ -35,8 +35,9 @@
 行为型模式（Behavioral Patterns）
 模板方法模式（Template Method Pattern）
 用途：定义一个操作中的算法骨架，而将一些步骤延迟到子类中。
-策略模式（Strategy Pattern）
+策略模式（Strategy Pattern）[已实现 - strategy/]
 用途：定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。
+示例：支付场景（支付宝、微信、银行卡）
 命令模式（Command Pattern）
 用途：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化。
 责任链模式（Chain of Responsibility Pattern）
