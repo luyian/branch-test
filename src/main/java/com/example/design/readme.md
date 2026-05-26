@@ -40,8 +40,9 @@
 示例：支付场景（支付宝、微信、银行卡）
 命令模式（Command Pattern）
 用途：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化。
-责任链模式（Chain of Responsibility Pattern）
+责任链模式（Chain of Responsibility Pattern）[已实现 - chain/]
 用途：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。
+示例：费用审批场景（组长、经理、总监逐级审批）
 迭代器模式（Iterator Pattern）
 用途：提供一种方法顺序访问一个聚合对象中各个元素，而又不暴露该对象的内部表示。
 观察者模式（Observer Pattern）

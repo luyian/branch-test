@@ -1,5 +1,7 @@
 # 代码修改记录
 
+## 2026-05-26 新增责任链模式演示（费用审批场景，`design/chain` 包下，含 README 说明文档）
+
 ## 2026-05-26 新增策略模式演示（支付场景，`design/strategy` 包下，含 README 说明文档）
 
 ## 2026-05-11 工行 SDK 从 system scope 改为 Nexus 私服依赖（nkrelease 仓库），删除 lib/ 目录
