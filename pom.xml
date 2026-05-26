@@ -159,7 +159,49 @@
             <artifactId>clickhouse-jdbc</artifactId>
             <version>0.3.2</version>
         </dependency>
+
+        <!-- 工行开放平台 SDK，从 Nexus 私服拉取 -->
+        <dependency>
+            <groupId>com.icbc</groupId>
+            <artifactId>icbc-api-sdk-cop</artifactId>
+            <version>20260415</version>
+        </dependency>
+        <dependency>
+            <groupId>com.icbc</groupId>
+            <artifactId>icbc-api-sdk-cop-io</artifactId>
+            <version>20260415</version>
+        </dependency>
+        <dependency>
+            <groupId>com.icbc</groupId>
+            <artifactId>hsm-software-share</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.icbc</groupId>
+            <artifactId>infosec-crypto</artifactId>
+            <version>1.02</version>
+        </dependency>
+        <dependency>
+            <groupId>com.icbc</groupId>
+            <artifactId>icbc-ca</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <!-- 工行 SDK 私服仓库；id 必须与 settings.xml 中 <server id> 一致以应用认证 -->
+        <repository>
+            <id>nkrelease</id>
+            <name>ICBC SDK Repo</name>
+            <url>http://120.25.120.234:8081/nexus/repository/nkrelease/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
